@@ -32,6 +32,8 @@
     UILabel *_originalPhotoLabel;
     
     CGFloat _offsetItemCount;
+    
+    UIView *_maskStatusBar;// 电池栏遮罩
 }
 @property (nonatomic, assign) BOOL isHideNaviBar;
 @property (nonatomic, strong) UIView *cropBgView;
@@ -108,6 +110,18 @@
     [_naviBar addSubview:_selectButton];
     [_naviBar addSubview:_backButton];
     [self.view addSubview:_naviBar];
+    
+    UIView *maskStatusBar =
+    [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 20)];
+    maskStatusBar.backgroundColor = [UIColor blackColor];
+    
+    UIView *maskInnerStatusBar =
+    [[UIView alloc] initWithFrame:maskStatusBar.bounds];
+    maskInnerStatusBar.backgroundColor = _naviBar.backgroundColor;
+    [maskStatusBar addSubview:maskInnerStatusBar];
+    
+    _maskStatusBar = maskStatusBar;
+    [[UIApplication sharedApplication].keyWindow addSubview:maskStatusBar];
 }
 
 - (void)configBottomToolBar {
