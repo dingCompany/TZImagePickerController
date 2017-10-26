@@ -84,6 +84,8 @@
         if (iOS7Later) [UIApplication sharedApplication].statusBarHidden = NO;
     }
     [TZImageManager manager].shouldFixOrientation = NO;
+    [_maskStatusBar removeFromSuperview];
+    _maskStatusBar = nil;
 }
 
 - (BOOL)prefersStatusBarHidden {
